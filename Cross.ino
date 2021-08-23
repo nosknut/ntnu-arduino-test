@@ -1,14 +1,3 @@
-bool OUTPUT = true;
-bool HIGH = true;
-bool LOW = false;
-void pinMode(int pin, bool mode){
-
-};
-
-void digitalWrite(int pin, bool mode){
-
-};
-
 class Light
 {
 public:
