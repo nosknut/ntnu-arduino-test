@@ -68,8 +68,6 @@ public:
         {
             if (timer.isComplete())
             {
-                //void(&b)() = [&]
-                //{ sequenceStep += 1; };
                 timer.start(delayMs);
             }
             if (timer.update())
