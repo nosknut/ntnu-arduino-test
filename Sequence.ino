@@ -26,6 +26,14 @@ public:
     {
         return complete;
     }
+    bool countDownFrom(long delayMs)
+    {
+        if (isComplete())
+        {
+            start(delayMs);
+        }
+        return update();
+    }
 };
 
 class Sequence
@@ -66,11 +74,7 @@ public:
     {
         if (checkedSteps == sequenceStep)
         {
-            if (timer.isComplete())
-            {
-                timer.start(delayMs);
-            }
-            if (timer.update())
+            if (timer.countDownFrom(delayMs))
             {
                 sequenceStep += 1;
             }
@@ -193,3 +197,44 @@ void loop()
         rampSequence.restart();
     }
 }
+
+/*
+alternative:
+
+int lampSequenceStep = 1;
+Timer timer;
+
+void loop()
+{
+    switch (lampSequenceStep)
+    {
+    case 1:
+        digitalWrite(lamp, HIGH);
+        lampSequenceStep++;
+        break;
+    case 2:
+        if (timer.countDownFrom(1000))
+        {
+            lampSequenceStep += 1;
+        }
+        break;
+    case 3:
+        digitalWrite(lamp, LOW);
+        lampSequenceStep++;
+        break;
+    case 4:
+        if (timer.countDownFrom(1000))
+        {
+            lampSequenceStep += 1;
+        }
+        break;
+    case 5:
+        digitalWrite(lamp, HIGH);
+        lampSequenceStep++;
+        break;
+    default:
+        lampSequenceStep = 1;
+        break;
+    }
+}
+*/
